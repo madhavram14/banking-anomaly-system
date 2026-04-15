@@ -15,17 +15,15 @@ ACCOUNTS
 
 
 TRANSACTIONS
-
 - txn_id → unique transaction id
-- account_id → which account is used
-- txn_type → debit or credit
-- amount → money value
+- user_tier → [Silver, Gold, Platinum]
+- currency → [INR, USD, EUR, MXN]
+- amount_local → amount in original currency
+- fx_rate → conversion rate to INR
+- amount_inr → total value in INR (local * rate)
+- fee_charged → calculated based on Tier
+- city → location of transaction
 - timestamp → date and time
-- channel → UPI / ATM / POS / NETBANKING
-- city → where transaction happened
-- device_id → which device used
-- status → success or failed
-
 
 -----------------------------------
 

@@ -34,3 +34,5 @@ This system:
 - too many transactions in short time
 - unusual time activity
 - different location usage
+- **Fee Evasion:** Users in a low tier (Silver) somehow getting zero fees.
+- **Global Velocity:** High-frequency transfers to international locations (Italy/Mexico).
