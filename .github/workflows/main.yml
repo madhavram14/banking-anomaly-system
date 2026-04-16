@@ -2,7 +2,8 @@ name: Banking Audit Pipeline
 
 on:
   push:
-    branches: [ main ]  # This triggers the "Robot" every time you push code
+    branches: [ main ]
+  workflow_dispatch: # This adds a "Run manually" button in GitHub just in case
 
 jobs:
   build-and-run:
@@ -20,7 +21,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pandas
+        pip install pandas jinja2
 
     - name: Run Banking Pipeline
       run: |
