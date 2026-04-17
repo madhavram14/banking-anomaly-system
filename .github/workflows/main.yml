@@ -25,7 +25,7 @@ jobs:
 
     - name: Run Banking Pipeline
       run: |
-        python day2_generator.py
+        python day2_generator.py  
         python ingest_to_sql.py
         python anomaly_detector.py
 

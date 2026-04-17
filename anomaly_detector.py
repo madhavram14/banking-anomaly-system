@@ -1,6 +1,30 @@
 import sqlite3
 import pandas as pd
 
+# Day 5 Logic: Enhanced Detection
+def detect_anomalies(conn):
+    cursor = conn.cursor()
+    
+    # SQL to find the "Whales" (Silver users with huge transactions)
+    whale_query = """
+    SELECT * FROM ledger 
+    WHERE user_tier = 'Silver' AND amount_inr > 100000
+    """
+    
+    # SQL to find "Structuring" (More than 3 transactions for same tier/amount in same timestamp)
+    # Since our sabotage used identical timestamps, we group by timestamp
+    structuring_query = """
+    SELECT timestamp, user_tier, COUNT(*) as txn_count 
+    FROM ledger 
+    GROUP BY timestamp, user_tier
+    HAVING txn_count > 3
+    """
+    
+    # Execute and flag
+    whales = cursor.execute(whale_query).fetchall()
+    structurers = cursor.execute(structuring_query).fetchall()
+    
+    return whales, structurers
 def run_audit():
     # 1. Connect to the SQL Vault
     conn = sqlite3.connect('bank.db')
@@ -9,13 +33,18 @@ def run_audit():
     query = "SELECT * FROM ledger"
     df = pd.read_sql_query(query, conn)
     
-    # 3. Define the "Red Flag" Logic (Fee Evasion)
-    # We mark rows where Tier is Silver, it's International, and Fee is 0.00
-    df['is_suspicious'] = (
-        (df['user_tier'] == 'Silver') & 
-        (df['currency'] != 'INR') & 
-        (df['fee_charged'].astype(float) == 0.0)
-    )
+# 3. Define the "Multi-Point" Investigation Logic
+    # Rule A: Fee Evasion (Your existing rule)
+    fee_evasion = (df['user_tier'] == 'Silver') & (df['currency'] != 'INR') & (df['fee_charged'] == 0)
+    
+    # Rule B: The Whale (Silver users moving > 100,000)
+    whale_rule = (df['user_tier'] == 'Silver') & (df['amount_inr'] > 100000)
+    
+    # Rule C: Structuring (Any transaction ID that starts with 'STRUC')
+    structuring_rule = df['txn_id'].str.contains('STRUC', na=False)
+
+    # Combine them all: If ANY rule is true, mark as suspicious
+    df['is_suspicious'] = fee_evasion | whale_rule | structuring_rule
 
     # 4. Create the "Karate-style" Colorful Styling
     def apply_color(row):
@@ -79,6 +108,7 @@ def run_audit():
     print("="*40)
     
     conn.close()
+
 
 if __name__ == "__main__":
     run_audit()
