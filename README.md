@@ -1,38 +1,16 @@
-# Banking Anomaly Detection System
 
-This project simulates banking transactions and finds suspicious activity.
 
-Example:
-- very high amount
-- too many transactions
-- strange timing
+# 🏛️ Global Sentinel: Banking Anomaly & Risk Engine
 
-## System Flow
+A high-performance Python and SQL-based auditing system designed to detect illicit financial patterns including Money Laundering (AML), Fee Evasion, and Structuring.
+
+## 📊 System Architecture
 
 ```mermaid
 flowchart TD
-A[User] --> B[Transactions]
-B --> C[Database]
-
-C --> D[Anomaly Detection]
-D --> E[Flagged Transactions]
-D --> F[Normal Transactions]
-```
-
-## What this system does
-
-This system:
-- generates banking transactions
-- stores them in a database
-- checks for suspicious activity
-- flags unusual transactions
-
-
-## Types of anomalies
-
-- high amount transactions
-- too many transactions in short time
-- unusual time activity
-- different location usage
-- **Fee Evasion:** Users in a low tier (Silver) somehow getting zero fees.
-- **Global Velocity:** High-frequency transfers to international locations (Italy/Mexico).
+    A[Raw Transaction Stream] --> B[(SQLite Vault)]
+    B --> C{Heuristic Risk Engine}
+    C -->|Score < 40| D[Compliant Ledger]
+    C -->|Score 40-49| E[Orange Alert: Secondary Review]
+    C -->|Score 50+| F[Red Alert: Critical Intervention]
+    F --> G[HTML Heatmap Report]
