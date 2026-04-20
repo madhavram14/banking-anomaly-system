@@ -1,6 +1,0 @@
-txn_id,user_tier,currency,amount_local,fx_rate,amount_inr,fee_charged,city,status,timestamp,risk_score,is_suspicious
-STRUC_0,Silver,,,,9000.0,,,Success,2026-04-17T05:56:26.671941,50,True
-STRUC_1,Silver,,,,9000.0,,,Success,2026-04-17T05:56:26.672690,50,True
-STRUC_2,Silver,,,,9000.0,,,Success,2026-04-17T05:56:26.672712,50,True
-STRUC_3,Silver,,,,9000.0,,,Success,2026-04-17T05:56:26.672724,50,True
-STRUC_4,Silver,,,,9000.0,,,Success,2026-04-17T05:56:26.672735,50,True

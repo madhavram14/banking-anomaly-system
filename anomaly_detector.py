@@ -1,30 +1,6 @@
 import sqlite3
 import pandas as pd
 
-# Day 5 Logic: Enhanced Detection
-def detect_anomalies(conn):
-    cursor = conn.cursor()
-    
-    # SQL to find the "Whales" (Silver users with huge transactions)
-    whale_query = """
-    SELECT * FROM ledger 
-    WHERE user_tier = 'Silver' AND amount_inr > 100000
-    """
-    
-    # SQL to find "Structuring" (More than 3 transactions for same tier/amount in same timestamp)
-    # Since our sabotage used identical timestamps, we group by timestamp
-    structuring_query = """
-    SELECT timestamp, user_tier, COUNT(*) as txn_count 
-    FROM ledger 
-    GROUP BY timestamp, user_tier
-    HAVING txn_count > 3
-    """
-    
-    # Execute and flag
-    whales = cursor.execute(whale_query).fetchall()
-    structurers = cursor.execute(structuring_query).fetchall()
-    
-    return whales, structurers
 def run_audit():
     # 1. Connect to the SQL Vault
     conn = sqlite3.connect('bank.db')
@@ -33,31 +9,40 @@ def run_audit():
     query = "SELECT * FROM ledger"
     df = pd.read_sql_query(query, conn)
     
-# 3. Define the "Multi-Point" Investigation Logic
-    # Rule A: Fee Evasion (Your existing rule)
-    fee_evasion = (df['user_tier'] == 'Silver') & (df['currency'] != 'INR') & (df['fee_charged'] == 0)
-    
-    # Rule B: The Whale (Silver users moving > 100,000)
-    whale_rule = (df['user_tier'] == 'Silver') & (df['amount_inr'] > 100000)
-    
-    # Rule C: Structuring (Any transaction ID that starts with 'STRUC')
-    structuring_rule = df['txn_id'].str.contains('STRUC', na=False)
+    # 3. The "Financial Duty" Risk Engine
+    def calculate_risk_score(row):
+        score = 0
+        # Rule 1: Placement Risk (Silver moving large INR)
+        if row['user_tier'] == 'Silver' and row['amount_inr'] > 100000:
+            score += 35
+        # Rule 2: Layering Risk (International + 0 Fees)
+        if row['currency'] != 'INR' and row['fee_charged'] == 0:
+            score += 45
+        # Rule 3: Structuring / Smurfing Fingerprint
+        if 'STRUC' in str(row['txn_id']) or row['amount_inr'] > 900000:
+            score += 50
+        return score
 
-    # Combine them all: If ANY rule is true, mark as suspicious
-    df['is_suspicious'] = fee_evasion | whale_rule | structuring_rule
+    # Apply the Score
+    df['risk_score'] = df.apply(calculate_risk_score, axis=1)
 
-    # 4. Create the "Karate-style" Colorful Styling
+    # Flag suspicious if score hits the threshold
+    df['is_suspicious'] = df['risk_score'] >= 40
+
+    # 4. Create the "Heatmap" Styling
     def apply_color(row):
-        if row['is_suspicious']:
-            # Red background with dark red text for anomalies
-            return ['background-color: #ffcccc; color: #990000; font-weight: bold'] * len(row)
+        if row['risk_score'] >= 50:
+            # Critical Risk: Bold Red
+            return ['background-color: #ff4d4d; color: white; font-weight: bold'] * len(row)
+        elif row['risk_score'] >= 35:
+            # Moderate Risk: Alert Orange
+            return ['background-color: #ffe6cc; color: #cc5200'] * len(row)
         return [''] * len(row)
 
     # Apply the styles
     styled_df = df.style.apply(apply_color, axis=1)
 
-    # 5. Build the Full HTML Page with CSS
-    # This adds the professional headers and status boxes you see in IntelliJ reports
+    # 5. Build the Full HTML Page
     html_header = """
     <html>
     <head>
@@ -83,32 +68,27 @@ def run_audit():
         <h1>🏛️ Banking Anomaly Audit Report</h1>
         <div class="summary-box">
             <strong>SYSTEM STATUS: ATTENTION REQUIRED</strong><br>
-            The engine has detected potential <b>Fee Evasion</b> or <b>Logic Errors</b>. 
-            Highlighted rows indicate Silver-tier users bypassing international transaction fees.
+            Multi-point Risk Scoring activated. Rows are highlighted based on <b>Placement, Layering, and Structuring</b> fingerprints.
         </div>
     """
     
-    html_footer = """
+    html_footer = f"""
         <p style="margin-top: 20px; color: #7f8c8d; font-size: 0.8em;">
-            Report generated on: """ + pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S') + """
+            Report generated on: {pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S')}
         </p>
     </body>
     </html>
     """
 
-    # Combine everything into one file
     final_html = html_header + styled_df.to_html() + html_footer
 
     with open('audit_report.html', 'w') as f:
         f.write(final_html)
     
     print("\n" + "="*40)
-    print("🎨 SUCCESS: Colorful HTML Report Generated!")
-    print("Open 'audit_report.html' to view the results.")
+    print("🎨 SUCCESS: Heatmapped Risk Report Generated!")
     print("="*40)
-    
     conn.close()
-
 
 if __name__ == "__main__":
     run_audit()
