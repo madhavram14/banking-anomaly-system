@@ -30,7 +30,7 @@ def generate_bank_data():
             'fx_rate': f"{rate:.2f}",
             'amount_inr': f"{amt_inr:.2f}",
             'fee_charged': f"{fee:.2f}",
-            'city': random.choice(['CHNA', 'ROME', 'MEXC']), # ISO-style city codes
+            'city': random.choice(['PUNE', 'CHENNAI', 'KOCHI', 'THRISSUR', None]), # Added None to test the UNKNOWN failsafe'city': random.choice(['PUNE', 'CHENNAI', 'KOCHI', 'THRISSUR', None]), # Added None to test the UNKNOWN failsafe
             'status': 'SUCCESS',
             'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         })
