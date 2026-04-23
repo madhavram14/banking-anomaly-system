@@ -1,29 +1,31 @@
 import sqlite3
 from datetime import datetime
+from config import DB_PATH  # Import the central path
 
 def inject_faults():
-    conn = sqlite3.connect('bank.db')
+    # Connect to the central Source of Truth
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
-    print("😈 Injecting 'ledger' anomalies using real schema...")
+    print(f"😈 Injecting anomalies into {DB_PATH}...")
 
     # 1. Structuring/Smurfing: Rapid small amounts (INR)
-    # We'll use a fake txn_id like 'SABOTAGE_001'
+    # Adding 'city' column and 'PUNE' value
     for i in range(5):
         cursor.execute("""
-            INSERT INTO ledger (txn_id, user_tier, amount_inr, status, timestamp) 
-            VALUES (?, ?, ?, ?, ?)
-        """, (f'STRUC_{i}', 'Silver', 9000.0, 'Success', datetime.now().isoformat()))
+            INSERT INTO ledger (txn_id, user_tier, amount_inr, city, status, timestamp) 
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, (f'STRUC_{i}', 'Silver', 9000.0, 'PUNE', 'Success', datetime.now().isoformat()))
 
     # 2. Impossible Large Amount: Finding the "Whale"
     cursor.execute("""
-        INSERT INTO ledger (txn_id, user_tier, amount_inr, status, timestamp) 
-        VALUES (?, ?, ?, ?, ?)
-    """, ('WHALE_999', 'Silver', 1000000.0, 'Success', datetime.now().isoformat()))
+        INSERT INTO ledger (txn_id, user_tier, amount_inr, city, status, timestamp) 
+        VALUES (?, ?, ?, ?, ?, ?)
+    """, ('WHALE_999', 'Silver', 1000000.0, 'PUNE', 'Success', datetime.now().isoformat()))
 
     conn.commit()
     conn.close()
-    print("✅ Sabotage Complete. The ledger is now dirty.")
+    print("✅ Sabotage Complete. The ledger is now dirty with a Pune origin.")
 
 if __name__ == "__main__":
     inject_faults()
