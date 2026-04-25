@@ -50,6 +50,12 @@ def run_audit():
     
     # 8. Save Forensic Results for Reporter
     df_suspicious.to_csv("audit_results.csv", index=False)
-
+# --- DAY 12: SIGNAL-TO-NOISE CALIBRATION ---
+    # If the transaction status is 'VERIFIED' (trusted merchant), 
+    # we reduce the risk score because it's less likely to be fraud.
+    df.loc[df['status'] == 'VERIFIED', 'risk_score'] -= 15
+    
+    # Re-evaluate suspicious flag based on calibrated score
+    df['is_suspicious'] = df['risk_score'] >= RISK_THRESHOLD
 if __name__ == "__main__":
     run_audit()
