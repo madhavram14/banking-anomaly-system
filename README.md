@@ -1,18 +1,15 @@
-# 🏛️ Global Sentinel: Banking Anomaly & Risk Engine
-**Version:** 2.0 (Day 10 Milestone)  
-**Architecture:** Centralized SQL-Vault with Absolute Pathing Logic  
+# 🏛️ Global Sentinel: Anomaly Detection System
 
-## 📌 Project Overview
-Global Sentinel is a high-performance Python and SQL-based auditing system designed to detect illicit financial patterns including Money Laundering (AML), Fee Evasion, and Structuring. This system utilizes a modular "Source of Truth" architecture to handle high-velocity transaction streams and provides forensic reporting on geographic and temporal anomalies.
+A high-performance forensic audit engine designed to identify banking anomalies, structured layering (smurfing), and velocity-based fraud patterns in SQL ledgers.
 
-## 📊 System Architecture
+## 🚀 Key Features
+* **Temporal Burst Analysis:** Detects rapid-fire transactions within a 30-second window.
+* **Whale Detection:** Identifies high-value transfers relative to user tier.
+* **Signal-to-Noise Calibration:** Automated exclusion of 'Verified Merchants' to reduce false positives.
+* **Geographic Hotspotting:** Real-time clustering of suspicious activity by city (Current Target: Pune).
 
-```mermaid
-flowchart TD
-    A[day2_generator.py: Raw Stream] -->|Ingest| B[(bank.db: SQLite Vault)]
-    S[sabotage_data.py: Chaos Monkey] -->|Inject Anomalies| B
-    B --> C{Heuristic Risk Engine: main.py}
-    C -->|Score < 40| D[Compliant Ledger]
-    C -->|Score 40-49| E[Orange Alert: Secondary Review]
-    C -->|Score 50+| F[Red Alert: Critical Intervention]
-    F --> G[reporter.py: Forensic Analysis Report]
+## 🛠️ Technical Stack
+* **Engine:** Python 3.12 (Pandas, NumPy)
+* **Database:** SQLite3 (Hardened Schema)
+* **Verification:** PyTest-style Unit Testing
+* **UI:** HTML5/CSS3 Forensic Dashboard
