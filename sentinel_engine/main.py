@@ -1,61 +1,49 @@
+# sentinel_engine/main.py
 import pandas as pd
 from database import fetch_transactions
 from engine import RiskSentinel
 from config import RISK_THRESHOLD
+from features import prepare_features
+from reporter import generate_html_report
 
 def run_audit():
-    print("Initializing Global Sentinel Audit...")
+    print("🚀 Initializing Global Sentinel Audit...")
     
-    # 1. Fetch data from SQL Vault
+    # 1. Data Ingestion
     df = fetch_transactions()
-    
     if df.empty:
         print("❌ Audit Aborted: No data found in the ledger.")
         return
 
-    # 2. Fix the Timestamp Crash (Day 11 Resilience Patch)
-    df['timestamp'] = pd.to_datetime(df['timestamp'], format='mixed')
+    # 2. Feature Engineering (Temporal & Numerical)
+    df = prepare_features(df)
     
-    # 3. Sort for Temporal Analysis
-    df = df.sort_values(by=['city', 'timestamp'])
-
+    # 3. Heuristic Evaluation
     sentinel = RiskSentinel(RISK_THRESHOLD)
-    
-    # 4. Standard Heuristic Evaluation (Row-by-Row)
     df[['risk_score', 'is_suspicious']] = df.apply(
         lambda row: sentinel.evaluate_transaction(row), 
         axis=1, result_type='expand'
     )
     
-    # 5. Advanced Velocity Logic (Sliding Window)
-    df['time_diff'] = df.groupby('city')['timestamp'].diff().dt.total_seconds()
-    
-    # FLAG: If transactions in the same city happen within 30 seconds
+    # 4. Advanced Velocity & Signal-to-Noise Calibration
+    # Velocity Logic (Sliding Window)
     velocity_mask = df['time_diff'] < 30
     df.loc[velocity_mask, 'is_suspicious'] = True
     df.loc[velocity_mask, 'risk_score'] += 20  
     
-    # 6. Filter for Forensic Results
-    df_suspicious = df[df['is_suspicious']].copy()
+    # Signal-to-Noise Calibration (Day 12)
+    df.loc[df['status'].str.upper() == 'VERIFIED', 'risk_score'] -= 15
     
-    # 7. Final Column Selection
-    columns_to_keep = [
-        'txn_id', 'user_tier', 'amount_inr', 'city', 
-        'status', 'timestamp', 'risk_score', 'is_suspicious'
-    ]
-    df_suspicious = df_suspicious[columns_to_keep]
-    
-    suspicious_count = len(df_suspicious)
-    print(f"Audit Complete. Found {suspicious_count} suspicious transactions.")
-    
-    # 8. Save Forensic Results for Reporter
-    df_suspicious.to_csv("audit_results.csv", index=False)
-# --- DAY 12: SIGNAL-TO-NOISE CALIBRATION ---
-    # If the transaction status is 'VERIFIED' (trusted merchant), 
-    # we reduce the risk score because it's less likely to be fraud.
-    df.loc[df['status'] == 'VERIFIED', 'risk_score'] -= 15
-    
-    # Re-evaluate suspicious flag based on calibrated score
+    # Final Suspicious Flag Update
     df['is_suspicious'] = df['risk_score'] >= RISK_THRESHOLD
+
+    # 5. Reporting
+    suspicious_count = df['is_suspicious'].sum()
+    print(f"✅ Audit Complete. Found {suspicious_count} suspicious transactions.")
+    
+    # Save results and trigger HTML report
+    df[df['is_suspicious']].to_csv("audit_results.csv", index=False)
+    generate_html_report(df)
+
 if __name__ == "__main__":
     run_audit()

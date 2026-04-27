@@ -1,43 +1,74 @@
 
     <html>
     <head>
-        <title>Sentinel Forensic Audit</title>
         <style>
-            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background-color: #f8fafc; }
-            h2 { color: #1e293b; margin-bottom: 5px; }
-            .summary-container { display: flex; gap: 20px; margin-bottom: 20px; }
-            .card { background: #fff; padding: 15px; border-radius: 8px; border-left: 5px solid #334155; box-shadow: 0 2px 4px rgba(0,0,0,0.05); flex: 1; }
-            .pune-card { border-left-color: #e11d48; }
-            table { width: 100%; border-collapse: collapse; background: white; }
-            th { background-color: #334155; color: white; padding: 12px; text-align: left; position: sticky; top: 0; }
-            td { padding: 10px; border-bottom: 1px solid #e2e8f0; }
-            tr { background-color: #fee2e2; color: #991b1b; font-weight: 500; }
-            tr:hover { background-color: #fecaca; }
+            body { font-family: sans-serif; background: #121212; color: white; padding: 40px; }
+            .high-risk { width: 100%; border-collapse: collapse; }
+            th { background: #333; padding: 10px; }
+            td { padding: 10px; border-bottom: 1px solid #444; background: rgba(255, 0, 0, 0.1); }
+            .header { border-bottom: 2px solid red; padding-bottom: 10px; margin-bottom: 20px; }
         </style>
     </head>
     <body>
-        <h2>🏛️ Global Sentinel: Anomaly Forensic Report</h2>
-        <p style="color: #64748b; margin-bottom: 20px;">Generated on: 2026-04-26 17:09:32</p>
-        
-        <div class="summary-container">
-            <div class="card">
-                <b>Total Flags Detected</b><br>
-                <span style="font-size: 24px;">78</span>
-            </div>
-            <div class="card pune-card">
-                <b>📍 Pune Hotspot Concentration</b><br>
-                <span style="font-size: 24px;">32.1%</span> (25 hits)
-            </div>
+        <div class="header">
+            <h1>📡 Sentinel Forensic Report</h1>
+            <p>Anomalies Detected: 6</p>
         </div>
-
-        <table>
-            <thead>
-                <tr><th>Txn Id</th><th>User Tier</th><th>Amount Inr</th><th>City</th><th>Status</th><th>Timestamp</th><th>Risk Score</th><th>Is Suspicious</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>TXN-48223</td><td>Platinum</td><td>18145.46</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-59586</td><td>Gold</td><td>134959.98</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-64646</td><td>Gold</td><td>167.41</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-77674</td><td>Platinum</td><td>4439.68</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-62936</td><td>Silver</td><td>168719.42</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-50451</td><td>Platinum</td><td>5697.05</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-44642</td><td>Platinum</td><td>355537.12</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-78644</td><td>Platinum</td><td>12271.8</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-56414</td><td>Silver</td><td>996.1</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-11961</td><td>Silver</td><td>374566.41</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-26980</td><td>Platinum</td><td>112962.03</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-46398</td><td>Gold</td><td>16485.07</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-87568</td><td>Platinum</td><td>137067.54</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-31131</td><td>Platinum</td><td>3200.02</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-42264</td><td>Gold</td><td>338376.7</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-84553</td><td>Silver</td><td>28072.94</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-16611</td><td>Platinum</td><td>4556.35</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-99151</td><td>Gold</td><td>2233.37</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-31513</td><td>Gold</td><td>6241.23</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-36541</td><td>Gold</td><td>335212.38</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-59879</td><td>Gold</td><td>116464.04</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-64049</td><td>Platinum</td><td>3750.41</td><td>CHENNAI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-20760</td><td>Silver</td><td>23362.31</td><td>KOCHI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-10257</td><td>Platinum</td><td>370558.68</td><td>KOCHI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-72832</td><td>Platinum</td><td>323717.03</td><td>KOCHI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-43171</td><td>Gold</td><td>22002.58</td><td>KOCHI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-81255</td><td>Platinum</td><td>66300.58</td><td>KOCHI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-69642</td><td>Silver</td><td>227549.87</td><td>KOCHI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-46705</td><td>Silver</td><td>4648.25</td><td>KOCHI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-72656</td><td>Silver</td><td>8289.7</td><td>KOCHI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-76946</td><td>Gold</td><td>76429.94</td><td>KOCHI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-14226</td><td>Platinum</td><td>447068.35</td><td>KOCHI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-72958</td><td>Gold</td><td>3192.59</td><td>KOCHI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-81590</td><td>Platinum</td><td>417788.74</td><td>KOCHI</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-63068</td><td>Silver</td><td>18190.76</td><td>PUNE</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-99140</td><td>Gold</td><td>6449.87</td><td>PUNE</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-34969</td><td>Silver</td><td>14563.41</td><td>PUNE</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-22917</td><td>Gold</td><td>19769.77</td><td>PUNE</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-71944</td><td>Silver</td><td>14925.94</td><td>PUNE</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-26833</td><td>Platinum</td><td>1017.71</td><td>PUNE</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-33074</td><td>Silver</td><td>29439.98</td><td>PUNE</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-78359</td><td>Gold</td><td>185280.76</td><td>PUNE</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-91722</td><td>Platinum</td><td>39485.45</td><td>PUNE</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-93219</td><td>Silver</td><td>12634.24</td><td>PUNE</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-87204</td><td>Platinum</td><td>159392.96</td><td>PUNE</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-98634</td><td>Gold</td><td>322208.46</td><td>PUNE</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-20314</td><td>Silver</td><td>132312.42</td><td>PUNE</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-35281</td><td>Silver</td><td>153141.8</td><td>PUNE</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-97946</td><td>Silver</td><td>196355.33</td><td>PUNE</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-78586</td><td>Platinum</td><td>374294.2</td><td>PUNE</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-37380</td><td>Silver</td><td>50820.99</td><td>PUNE</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-50907</td><td>Gold</td><td>4233.67</td><td>PUNE</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-63095</td><td>Gold</td><td>192866.62</td><td>PUNE</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>STRUC_0</td><td>Silver</td><td>9000.0</td><td>PUNE</td><td>Success</td><td>2026-04-22 20:56:40.021867</td><td>40</td><td>True</td></tr><tr><td>STRUC_1</td><td>Silver</td><td>9000.0</td><td>PUNE</td><td>Success</td><td>2026-04-22 20:56:40.031250</td><td>60</td><td>True</td></tr><tr><td>STRUC_2</td><td>Silver</td><td>9000.0</td><td>PUNE</td><td>Success</td><td>2026-04-22 20:56:40.031289</td><td>60</td><td>True</td></tr><tr><td>STRUC_3</td><td>Silver</td><td>9000.0</td><td>PUNE</td><td>Success</td><td>2026-04-22 20:56:40.031298</td><td>60</td><td>True</td></tr><tr><td>STRUC_4</td><td>Silver</td><td>9000.0</td><td>PUNE</td><td>Success</td><td>2026-04-22 20:56:40.031305</td><td>60</td><td>True</td></tr><tr><td>WHALE_999</td><td>Silver</td><td>1000000.0</td><td>PUNE</td><td>Success</td><td>2026-04-22 20:56:40.031312</td><td>65</td><td>True</td></tr><tr><td>TXN-89024</td><td>Gold</td><td>324880.65</td><td>THRISSUR</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-20452</td><td>Gold</td><td>2953.49</td><td>THRISSUR</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-30257</td><td>Silver</td><td>411516.2</td><td>THRISSUR</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-25832</td><td>Silver</td><td>47605.35</td><td>THRISSUR</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-66556</td><td>Silver</td><td>10244.46</td><td>THRISSUR</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-33352</td><td>Gold</td><td>1239.77</td><td>THRISSUR</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-56966</td><td>Gold</td><td>17367.24</td><td>THRISSUR</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-44316</td><td>Gold</td><td>225434.57</td><td>THRISSUR</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-34072</td><td>Platinum</td><td>115883.84</td><td>THRISSUR</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-67607</td><td>Platinum</td><td>4303.51</td><td>THRISSUR</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-70101</td><td>Platinum</td><td>2679.9</td><td>THRISSUR</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-18950</td><td>Gold</td><td>452700.92</td><td>THRISSUR</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-78170</td><td>Platinum</td><td>4387.38</td><td>THRISSUR</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-58383</td><td>Silver</td><td>3004.86</td><td>THRISSUR</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-44197</td><td>Gold</td><td>320209.43</td><td>THRISSUR</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-76284</td><td>Silver</td><td>169875.09</td><td>THRISSUR</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-76598</td><td>Silver</td><td>217111.47</td><td>THRISSUR</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-88721</td><td>Silver</td><td>15681.45</td><td>THRISSUR</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr><tr><td>TXN-80132</td><td>Gold</td><td>303625.59</td><td>THRISSUR</td><td>SUCCESS</td><td>2026-04-22 20:50:55.000000</td><td>20</td><td>True</td></tr>
-            </tbody>
-        </table>
+        <table class="dataframe high-risk">
+  <thead>
+    <tr style="text-align: right;">
+      <th>txn_id</th>
+      <th>user_tier</th>
+      <th>amount_inr</th>
+      <th>city</th>
+      <th>risk_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>STRUC_0</td>
+      <td>Silver</td>
+      <td>9000.0</td>
+      <td>PUNE</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <td>STRUC_1</td>
+      <td>Silver</td>
+      <td>9000.0</td>
+      <td>PUNE</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <td>STRUC_2</td>
+      <td>Silver</td>
+      <td>9000.0</td>
+      <td>PUNE</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <td>STRUC_3</td>
+      <td>Silver</td>
+      <td>9000.0</td>
+      <td>PUNE</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <td>STRUC_4</td>
+      <td>Silver</td>
+      <td>9000.0</td>
+      <td>PUNE</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <td>WHALE_999</td>
+      <td>Silver</td>
+      <td>1000000.0</td>
+      <td>PUNE</td>
+      <td>65</td>
+    </tr>
+  </tbody>
+</table>
     </body>
     </html>
     
