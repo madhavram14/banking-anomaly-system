@@ -2,73 +2,93 @@
     <html>
     <head>
         <style>
-            body { font-family: sans-serif; background: #121212; color: white; padding: 40px; }
-            .high-risk { width: 100%; border-collapse: collapse; }
-            th { background: #333; padding: 10px; }
-            td { padding: 10px; border-bottom: 1px solid #444; background: rgba(255, 0, 0, 0.1); }
-            .header { border-bottom: 2px solid red; padding-bottom: 10px; margin-bottom: 20px; }
+            body { font-family: 'Segoe UI', sans-serif; background: #0f172a; color: #f1f5f9; padding: 40px; }
+            .header { border-bottom: 2px solid #38bdf8; padding-bottom: 10px; margin-bottom: 20px; }
+            table { width: 100%; border-collapse: collapse; background: #1e293b; border-radius: 12px; overflow: hidden; }
+            th { background: #334155; color: #38bdf8; padding: 15px; text-align: left; font-size: 0.85rem; text-transform: uppercase; }
+            td { padding: 15px; border-bottom: 1px solid #334155; font-size: 0.9rem; color: #e2e8f0; }
+            .critical-row { background: rgba(139, 92, 246, 0.1); border-left: 5px solid #8b5cf6; }
+            .ai-badge { background: #8b5cf6; color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.65rem; font-weight: bold; }
+            .score-highlight { color: #38bdf8; font-weight: bold; }
         </style>
     </head>
     <body>
         <div class="header">
             <h1>📡 Sentinel Forensic Report</h1>
-            <p>Anomalies Detected: 6</p>
+            <p>Detection Engine: <strong>Hybrid (Heuristics + Isolation Forest)</strong> | Anomalies: <strong>6</strong></p>
         </div>
-        <table class="dataframe high-risk">
-  <thead>
-    <tr style="text-align: right;">
-      <th>txn_id</th>
-      <th>user_tier</th>
-      <th>amount_inr</th>
-      <th>city</th>
-      <th>risk_score</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>STRUC_0</td>
-      <td>Silver</td>
-      <td>9000.0</td>
-      <td>PUNE</td>
-      <td>40</td>
-    </tr>
-    <tr>
-      <td>STRUC_1</td>
-      <td>Silver</td>
-      <td>9000.0</td>
-      <td>PUNE</td>
-      <td>60</td>
-    </tr>
-    <tr>
-      <td>STRUC_2</td>
-      <td>Silver</td>
-      <td>9000.0</td>
-      <td>PUNE</td>
-      <td>60</td>
-    </tr>
-    <tr>
-      <td>STRUC_3</td>
-      <td>Silver</td>
-      <td>9000.0</td>
-      <td>PUNE</td>
-      <td>60</td>
-    </tr>
-    <tr>
-      <td>STRUC_4</td>
-      <td>Silver</td>
-      <td>9000.0</td>
-      <td>PUNE</td>
-      <td>60</td>
-    </tr>
-    <tr>
-      <td>WHALE_999</td>
-      <td>Silver</td>
-      <td>1000000.0</td>
-      <td>PUNE</td>
-      <td>65</td>
-    </tr>
-  </tbody>
-</table>
+        <table>
+            <tr>
+                <th>Status</th>
+                <th>Transaction ID</th>
+                <th>User Tier</th>
+                <th>Amount (INR)</th>
+                <th>City</th>
+                <th>Rule Score</th>
+                <th>AI Risk Score</th>
+            </tr>
+    
+        <tr class="critical-row">
+            <td><span class="ai-badge">AI VERIFIED</span></td>
+            <td>STRUC_0</td>
+            <td>Silver</td>
+            <td>₹9,000.00</td>
+            <td>PUNE</td>
+            <td>40</td>
+            <td class="score-highlight">60.8%</td>
+        </tr>
+        
+        <tr class="critical-row">
+            <td><span class="ai-badge">AI VERIFIED</span></td>
+            <td>STRUC_1</td>
+            <td>Silver</td>
+            <td>₹9,000.00</td>
+            <td>PUNE</td>
+            <td>60</td>
+            <td class="score-highlight">53.6%</td>
+        </tr>
+        
+        <tr class="">
+            <td></td>
+            <td>STRUC_2</td>
+            <td>Silver</td>
+            <td>₹9,000.00</td>
+            <td>PUNE</td>
+            <td>60</td>
+            <td class="score-highlight">47.1%</td>
+        </tr>
+        
+        <tr class="">
+            <td></td>
+            <td>STRUC_3</td>
+            <td>Silver</td>
+            <td>₹9,000.00</td>
+            <td>PUNE</td>
+            <td>60</td>
+            <td class="score-highlight">43.0%</td>
+        </tr>
+        
+        <tr class="">
+            <td></td>
+            <td>STRUC_4</td>
+            <td>Silver</td>
+            <td>₹9,000.00</td>
+            <td>PUNE</td>
+            <td>60</td>
+            <td class="score-highlight">42.5%</td>
+        </tr>
+        
+        <tr class="critical-row">
+            <td><span class="ai-badge">AI VERIFIED</span></td>
+            <td>WHALE_999</td>
+            <td>Silver</td>
+            <td>₹1,000,000.00</td>
+            <td>PUNE</td>
+            <td>65</td>
+            <td class="score-highlight">58.6%</td>
+        </tr>
+        
+        </table>
     </body>
     </html>
     
