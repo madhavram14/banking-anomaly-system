@@ -1,5 +1,33 @@
 # 📜 Development Sprint Logs: Global Sentinel
 
+### **Day 16: Pre-Deployment & Roadmap**
+* **Streak Protection:** Finalized Chennai build documentation.
+* **Environment Freeze:** Updated `requirements.txt` for Pune transition.
+* **Scalability Roadmap:** Defined Phase 2 (Agentic AI) and Phase 3 (High-Scale).
+
+### **Day 15: The AI Intelligence Layer (Major Milestone)**
+* **Hybrid Detection:** Integrated Scikit-Learn `Isolation Forest` with Heuristic rules.
+* **Feature Engineering:** Implemented `amt_normalized` for unsupervised ML.
+* **Forensic Dashboard:** Designed custom Dark-Mode HTML report with "AI VERIFIED" badges.
+* **Architecture Fix:** Resolved circular imports and folder-package conflicts.
+
+### **Day 14: Environment Hardening & Dependency Recovery**
+* **Linux Troubleshooting:** Resolved `threadpoolctl` and `GLIBCXX` versioning issues on Fedora 38.
+* **ML Pipeline Prep:** Successfully installed and verified `scikit-learn` and `joblib`.
+* **Library Auditing:** Cleaned up unused dependencies to optimize the "Pune move" build.
+
+### **Day 13: Project Transition & Roadmap Pivot**
+* **Scope Redefinition:** Pivoted the project from a "Simple Rule Engine" to a "Hybrid AI System" following workplace project shifts.
+* **Strategic Detachment:** Focused on high-agency personal development over corporate compliance.
+
+### **Day 12: Advanced Data Integrity**
+* **Edge Case Hardening:** Implemented logic to handle missing `user_tier` and `city` data without system crashes.
+* **Security Logic:** Added basic validation layers for the SQL ingestion script.
+
+### **Day 11: System Optimization**
+* **Performance Tuning:** Optimized Pandas operations for transaction evaluation.
+* **Documentation Refinement:** Updated `DESIGN.md` to reflect the multi-layered detection strategy.
+
 ### **Day 10: Absolute Portability & Architecture Sync**
 * **Centralized Configuration:** Implemented `config.py` with `BASE_DIR` absolute pathing.
 * **Architecture Visualization:** Integrated Mermaid.js diagrams.
@@ -40,3 +68,4 @@
 ### **Day 1: Project Blueprint**
 * **System Design:** Defined "Global Sentinel" core scope.
 * **Environment Setup:** Initialized Linux environment and Git repository.
+
