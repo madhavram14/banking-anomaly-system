@@ -14,3 +14,11 @@ WEIGHTS = {
     "STRUCTURING": 40,    # Increase from 30 to 40 to meet the Threshold
     "VELOCITY": 20
 }
+# Add this to your config.py
+CITY_COORDS = {
+    "Chennai": (13.0827, 80.2707),
+    "Pune": (18.5204, 73.8567),
+    "Mumbai": (19.0760, 72.8777),
+    "Bangalore": (12.9716, 77.5946),
+    "Delhi": (28.6139, 77.2090)
+}

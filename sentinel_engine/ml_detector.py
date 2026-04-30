@@ -25,3 +25,21 @@ def detect_anomalies_ai(df):
     df['ai_risk_score'] = (1 - scores) * 50 # Scaling for the dashboard
     
     return df
+from math import radians, cos, sin, asin, sqrt
+
+def calculate_distance(city1, city2):
+    if city1 == city2: return 0
+    lat1, lon1 = CITY_COORDS.get(city1, (0,0))
+    lat2, lon2 = CITY_COORDS.get(city2, (0,0))
+    
+    # Haversine formula
+    lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+    dlon = lon2 - lon1 
+    dlat = lat2 - lat1 
+    a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+    c = 2 * asin(sqrt(a)) 
+    km = 6371 * c
+    return km
+
+# Logic to inject into your detection loop:
+# velocity = distance / time_delta_hours

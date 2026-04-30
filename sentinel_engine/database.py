@@ -13,7 +13,7 @@ def get_connection():
 def fetch_transactions():
     conn = get_connection()
     if conn:
-        df = pd.read_sql_query("SELECT * FROM ledger", conn)
+        df = pd.read_sql_query("SELECT * FROM ledger ORDER BY user_id, timestamp ASC", conn)
         conn.close()
         return df
     return pd.DataFrame()

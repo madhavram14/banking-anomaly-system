@@ -1,5 +1,12 @@
 # 📜 Development Sprint Logs: Global Sentinel
 
+### **Day 17: Pune Phase - Spatiotemporal Hardening**
+* **Schema Evolution:** Integrated `user_id` into `ledger` table and generator.
+* **Performance:** Added SQL Indexing for `user_id` to handle high-scale querying.
+* **Sabotage Logic:** Implemented "Impossible Travel" synthetic data injection (Chennai -> Pune in 5 mins).
+* **Feature Engineering**: Integrated Haversine formula in utils.py for real-world distance calculation.
+* **Algorithm Update**: Shifted detection strategy from "Isolated Transactions" to "Sequential User Behavior" analysis.
+
 ### **Day 16: Pre-Deployment & Roadmap**
 * **Streak Protection:** Finalized Chennai build documentation.
 * **Environment Freeze:** Updated `requirements.txt` for Pune transition.
