@@ -25,3 +25,13 @@ def get_velocity(city1, city2, time_diff_hours):
     km = 6371 * 2 * asin(sqrt(a))
     
     return km / time_diff_hours
+def is_impossible_travel(velocity_kmh):
+    """
+    Rule: Flags if the travel speed exceeds commercial flight limits.
+    Anything > 900 km/h triggers a geographical anomaly.
+    """
+    COMMERCIAL_FLIGHT_MAX_KMH = 900
+    return velocity_kmh > COMMERCIAL_FLIGHT_MAX_KMH
+
+# Optional: Add DELHI to your CITY_MAP if you want to expand the test net
+# "DELHI": (28.7041, 77.1025),
