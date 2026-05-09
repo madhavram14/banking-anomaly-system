@@ -1,16 +1,32 @@
-# sentinel_engine/reporter.py
 import os
+import pandas as pd
+import ollama
 
-def generate_html_report(df):
+def get_llm_reasoning(anomaly_detail):
     """
-    Generates a professional forensic dashboard with AI-verified badges.
+    Uses local Llama 3 via Ollama for zero-latency, private forensic analysis.
     """
-    # 1. Filter for the suspicious hits
-    suspicious_df = df[df['is_suspicious'] == True].copy()
-    count_val = len(suspicious_df)
-    
-    # 2. Define the HTML and CSS Template
-    # We use a placeholder "REPLACE_COUNT" to avoid .format() conflicts with CSS braces
+    try:
+        response = ollama.chat(model='llama3', messages=[
+          {
+            'role': 'user',
+            'content': f"You are a Senior Banking Fraud Investigator. Provide a 2-sentence forensic summary for this anomaly: {anomaly_detail}",
+          },
+        ])
+        return response['message']['content'].strip()
+    except Exception as e:
+        return f"Local LLM Error: {str(e)}"
+
+def generate_html_report(alerts_list):
+    """
+    Generates the professional forensic dashboard.
+    """
+    df = pd.DataFrame(alerts_list)
+    if df.empty:
+        print("📭 No alerts to report.")
+        return
+
+    count_val = len(df)
     html_template = """
     <html>
     <head>
@@ -20,63 +36,36 @@ def generate_html_report(df):
             table { width: 100%; border-collapse: collapse; background: #1e293b; border-radius: 12px; overflow: hidden; }
             th { background: #334155; color: #38bdf8; padding: 15px; text-align: left; font-size: 0.85rem; text-transform: uppercase; }
             td { padding: 15px; border-bottom: 1px solid #334155; font-size: 0.9rem; color: #e2e8f0; }
-            .critical-row { background: rgba(139, 92, 246, 0.1); border-left: 5px solid #8b5cf6; }
-            .ai-badge { background: #8b5cf6; color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.65rem; font-weight: bold; }
-            .score-highlight { color: #38bdf8; font-weight: bold; }
+            .ai-insight { color: #38bdf8; font-style: italic; font-weight: 500; }
+            .alert-text { color: #f472b6; font-weight: bold; }
         </style>
     </head>
     <body>
         <div class="header">
             <h1>📡 Sentinel Forensic Report</h1>
-            <p>Detection Engine: <strong>Hybrid (Heuristics + Isolation Forest)</strong> | Anomalies: <strong>REPLACE_COUNT</strong></p>
+            <p>Detection Engine: <strong>Hybrid (Deterministic + Llama 3)</strong> | Anomalies Found: <strong>REPLACE_COUNT</strong></p>
         </div>
         <table>
             <tr>
-                <th>Status</th>
                 <th>Transaction ID</th>
-                <th>User Tier</th>
-                <th>Amount (INR)</th>
-                <th>City</th>
-                <th>Rule Score</th>
-                <th>AI Risk Score</th>
+                <th>Status</th>
+                <th>Logic Flags (Triage)</th>
+                <th>AI Forensic Insight</th>
             </tr>
     """
-    
-    # Insert the count safely
     html_template = html_template.replace("REPLACE_COUNT", str(count_val))
 
-    # 3. Build the Data Rows
-    for _, row in suspicious_df.iterrows():
-        # Check for AI confirmation
-        is_ai = row.get('is_ai_verified', False)
-        row_class = "critical-row" if is_ai else ""
-        ai_badge = '<span class="ai-badge">AI VERIFIED</span>' if is_ai else ""
-        
-        # Format values for professional display
-        ai_score = f"{row.get('ai_risk_score', 0):.1f}%"
-        formatted_amt = f"₹{row['amount_inr']:,.2f}"
-        
+    for _, row in df.iterrows():
         html_template += f"""
-        <tr class="{row_class}">
-            <td>{ai_badge}</td>
-            <td>{row['txn_id']}</td>
-            <td>{row['user_tier']}</td>
-            <td>{formatted_amt}</td>
-            <td>{row['city']}</td>
-            <td>{row['risk_score']}</td>
-            <td class="score-highlight">{ai_score}</td>
+        <tr>
+            <td><code>{row['transaction_id']}</code></td>
+            <td class="alert-text">{row['alert']}</td>
+            <td>{row['details']}</td>
+            <td class="ai-insight">{row.get('ai_analysis', 'No analysis.')}</td>
         </tr>
         """
+    html_template += "</table></body></html>"
 
-    # 4. Close the tags
-    html_template += """
-        </table>
-    </body>
-    </html>
-    """
-    
-    # 5. Write to file
     with open("audit_report.html", "w") as f:
         f.write(html_template)
-    
-    print("🎨 Professional Dashboard Generated: audit_report.html")
+    print("🎨 Dashboard Generated: audit_report.html")
